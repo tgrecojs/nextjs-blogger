@@ -1,8 +1,8 @@
 import AppBar from 'material-ui/AppBar';
 
-const Header = () =>
+const Header = ({ title = 'Next.js blogging application!'}) =>
 <AppBar
-title="Title"
+title={title}
 iconClassNameRight="muidocs-icon-navigation-expand-more"
 />
 
