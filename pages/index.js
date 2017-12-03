@@ -5,18 +5,22 @@ import Header from '../components/header';
 import { Card, CardHeader, CardText } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 
+const styles = {
+  cardStyles: {
+    margin: 10,
+  }
+}
+
 const Page = ({posts}) =>
   <div>
+  { /**
+   * Dynamic Import for Header?
+   */}
   <Header />
-     
     {posts.map(x =>
-      <Card key={x.id} className="post">
-      <CardHeader title={x.title} />
-        {/*
-          show the /blog/:x.id url in the browser
-          but use the pages/post.js file with the x.id as a query internally
-        */}
-        <CardText>
+      <Card key={x.id} style={styles.cardStyles}>
+      <CardHeader title={x.title}  />
+       <CardText>
         <RaisedButton primary={true} fullWidth={true}>
         <Link prefetch href={`/post?id=${x.id}`} as={`/blog/${x.id}`}>
           <a>

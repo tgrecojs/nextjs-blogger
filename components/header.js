@@ -1,9 +1,16 @@
 import AppBar from 'material-ui/AppBar';
+export const styles = {
+    title: {
+      textAlign: 'center',
+    },
+  };
+
 
 const Header = ({ title = 'Next.js blogging application!'}) =>
 <AppBar
 title={title}
-iconClassNameRight="muidocs-icon-navigation-expand-more"
+showMenuIconButton={false}
+style={styles.title}
 />
 
 export default Header;

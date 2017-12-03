@@ -2,15 +2,13 @@ import { Component } from 'react'
 import Link from 'next/link';
 import withStyles from '../shared/MUI/withMUI';
 import Header from '../components/header';
-
-const API_KEY = 'AIzaSyAvTf4FzPZt6hr7DtAXt2dBmQ5rqZXeZm8';
 import { Card, CardHeader, CardText } from 'material-ui/Card'
 
 const Page = ({id, content, title }) => (
   <div>
   <Header />
     <Card>
-    <CardHeader title={title} />
+    <CardHeader title={title} titleStyle={{textAlign: 'center'}} />
     <CardText>
     <div dangerouslySetInnerHTML={{__html: content }} />
     <Link href="/" as="/blog">
