@@ -8,7 +8,7 @@ const Page = ({id, content, title }) => (
   <div>
   <Header />
     <Card>
-    <CardHeader title={title} titleStyle={{textAlign: 'center'}} />
+    <CardHeader title={title} />
     <CardText>
     <div dangerouslySetInnerHTML={{__html: content }} />
     <Link href="/" as="/blog">
