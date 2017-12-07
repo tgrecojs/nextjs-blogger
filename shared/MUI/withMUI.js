@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { loadGetInitialProps } from 'next/dist/lib/utils';
 import Head from 'next/head';
 import {
   PRIMARY_COLOR,
@@ -35,11 +34,7 @@ const withMaterialUI = ComposedComponent => {
     static async getInitialProps(ctx) {
       const { req } = ctx;
       const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
-
-      /**
-       * subProps 
-       */
-      const subProps = await loadGetInitialProps(ComposedComponent, ctx);
+      const subProps = await ComposedComponent.getInitialProps(ctx)
 
       return {
         ...subProps,

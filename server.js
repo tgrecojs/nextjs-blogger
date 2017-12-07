@@ -29,8 +29,8 @@ app.prepare().then(() => {
 
   // redirect from /post to /blog or /post?id to /blog/:id
   server.get('/post', (req, res) => {
-    if (req.query.id) return res.redirect('/blog')
-    res.redirect(301, `/blog/${req.query.id}`)
+    if (req.query.id) return res.redirect('/blog/${req.query.id}')
+    res.redirect(301, `/blog`)
   })
 
   // redirect / to /blog

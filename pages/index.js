@@ -35,7 +35,7 @@ const Page = ({posts}) =>
 
 
 Page.getInitialProps = async () => {
-    const res = await fetch(`https://www.googleapis.com/blogger/v3/blogs/4789269094064278868/posts?key=${process.env.BLOGGER_API_KEY}`)
+    const res = await fetch(`https://www.googleapis.com/blogger/v3/blogs/4789269094064278868/posts?key=AIzaSyAvTf4FzPZt6hr7DtAXt2dBmQ5rqZXeZm8`)
     const json = await res.json()
     return {posts: json.items};
   }
