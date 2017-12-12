@@ -11,26 +11,14 @@ app.prepare().then(() => {
 
   // use pages/index.js as /blog
   server.get('/blog', (req, res) => {
-    return app.render(req, res, '/', req.query)
+    return app.render(req, res, '/')
   })
 
   // use pages/post.js as /blog/:id
   server.get('/blog/:id', (req, res) => {
-    return app.render(req, res,'/post',
-      Object.assign(
-        {
-          id: req.params.id,
-          // post: req.params.content
-        },
-        req.query
-      )
-    )
-  })
-
-  // redirect from /post to /blog or /post?id to /blog/:id
-  server.get('/post', (req, res) => {
-    if (req.query.id) return res.redirect(`/blog/${req.query.id}`)
-    res.redirect(301, `/blog`)
+    
+    return app.render(req, res,'/post',  Object.assign({ id: req.params.id }, req.query))
+    
   })
 
   // redirect / to /blog
@@ -38,7 +26,7 @@ app.prepare().then(() => {
     res.redirect(301, '/blog')
   })
 
-  // handle each other url
+  // handle each url
   server.get('*', (req, res) => {
     return handle(req, res)
   })

@@ -3,8 +3,9 @@ import Link from 'next/link';
 import withStyles from '../shared/MUI/withMUI';
 import Header from '../components/header';
 import { Card, CardHeader, CardText } from 'material-ui/Card'
+import 'isomorphic-fetch';
 
-const Page = ({id, content, title }) => (
+const Page = ({content, title}) => (
   <div>
   <Header />
     <Card>
@@ -20,11 +21,11 @@ const Page = ({id, content, title }) => (
 ) 
 
 Page.getInitialProps = async ({query: { id }}) => {
-    const res = await fetch(`https://www.googleapis.com/blogger/v3/blogs/4789269094064278868/posts/${id}?key=${process.env.BLOGGER_API_KEY}`);
-    const json = await res.json();
+    const response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/4789269094064278868/posts/${id}?key=${process.env.BLOGGER_API_KEY}`);
+    const json = await response.json();
     const title = json.title;
     const content = json.content;
-    return { id, title, content };
+    return { title, content };
 } 
 
 export default withStyles(Page);
