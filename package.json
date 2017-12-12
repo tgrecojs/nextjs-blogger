@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node server.js",
-    "build": "next build",
-    "start": "next start"
+    "dev": "next",
+    "start": "next start",
+    "build": "next build"
   },
   "keywords": [],
   "author": "Thomas Greco",
