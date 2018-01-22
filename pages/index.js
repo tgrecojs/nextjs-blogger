@@ -1,44 +1,44 @@
-import Link from 'next/link'
-import 'isomorphic-fetch';
-import withStyles from '../shared/MUI/withMUI';
 import Header from '../components/header';
-import { Card, CardHeader, CardText } from 'material-ui/Card'
-import RaisedButton from 'material-ui/RaisedButton'
+import withMui from '../shared/MUI/withMUI';
+import 'isomorphic-fetch';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
+import Link from 'next/link';
 
-const styles = {
-  cardStyles: {
-    margin: 10,
-  }
+const Index = ({ posts }) => 
+    <div>
+    <style jsx>
+        {`
+            .post-link {
+                text-decoration: none;
+                color: #fff;
+                font-size: 18px;
+            }
+        `}
+    </style>
+    <Header />
+      {
+          posts.map(x => 
+            <Card key={x.id}> 
+                <CardHeader title={x.title} />
+                <CardText>
+                    <RaisedButton fullWidth={true} primary={true}>
+                    <Link prefetch href={`/post?id=${x.id}`} as={`/blog/${x.id}`}>
+                        <a className="post-link">
+                            Click to view post!
+                        </a>
+                    </Link>
+                    </RaisedButton>
+                </CardText>
+            </Card>
+        )
+      }
+    </div>;
+
+Index.getInitialProps = async () => {
+    const response = await fetch(`${process.env.BLOGGER_URL}?key=${process.env.API_KEY}`);
+    const data = await response.json();
+    return { posts: data.items }
 }
 
-const Page = ({posts}) =>
-  <div>
-  { /**
-   * Dynamic Import for Header?
-   */}
-  <Header />
-    {posts.map(x =>
-      <Card key={x.id} style={styles.cardStyles}>
-      <CardHeader title={x.title}  />
-       <CardText>
-        <RaisedButton primary={true} fullWidth={true}>
-        <Link prefetch href={`/post?id=${x.id}`} as={`/blog/${x.id}`}>
-          <a>
-            Click to Read This Post
-          </a>
-        </Link>
-        </RaisedButton>
-        </CardText>
-      </Card>
-    )}
-  </div>
-
-
-Page.getInitialProps = async () => {
-    const res = await fetch(`https://www.googleapis.com/blogger/v3/blogs/4789269094064278868/posts?key=AIzaSyAvTf4FzPZt6hr7DtAXt2dBmQ5rqZXeZm8`)
-    const json = await res.json()
-    return {posts: json.items};
-  }
-
-export default withStyles(Page);
-  
+export default withMui(Index);
